@@ -23,8 +23,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { signupSchema } from "../schemas";
+import { useSignUp } from "../api/use-sign-up";
 
 export const SignUpCard = () => {
+  const { mutate } = useSignUp();
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -35,6 +37,7 @@ export const SignUpCard = () => {
   });
 
   const onSubmit = (values: z.infer<typeof signupSchema>) => {
+    mutate({ json: values });
     console.log({ values });
   };
 
