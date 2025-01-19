@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import {
   Card,
@@ -26,7 +28,7 @@ import { signupSchema } from "../schemas";
 import { useSignUp } from "../api/use-sign-up";
 
 export const SignUpCard = () => {
-  const { mutate } = useSignUp();
+  const { mutate, isPending } = useSignUp();
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -117,7 +119,7 @@ export const SignUpCard = () => {
               )}
             />
             <Button
-              disabled={false}
+              disabled={isPending}
               size="lg"
               className="w-full">
               Sign Up
@@ -130,7 +132,7 @@ export const SignUpCard = () => {
       </div>
       <CardContent className="p-7 flex flex-col gap-y-4">
         <Button
-          disabled={false}
+          disabled={isPending}
           variant="secondary"
           size="lg"
           className="w-full">
@@ -138,7 +140,7 @@ export const SignUpCard = () => {
           Continue with Google
         </Button>
         <Button
-          disabled={false}
+          disabled={isPending}
           variant="secondary"
           size="lg"
           className="w-full">
