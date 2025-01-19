@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { client } from "@/lib/rpc";
 
-export const useCurrent = () => {
+export const useCurrentUser = () => {
   const query = useQuery({
     queryKey: ["current"],
     queryFn: async () => {
