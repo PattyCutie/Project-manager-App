@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DottedSeparator } from "@/components/dotted-separator";
@@ -20,7 +22,7 @@ import { signInSchema } from "../schemas";
 import { useSignIn } from "../api/use-sign-in";
 
 export const SignInCard = () => {
-  const { mutate } = useSignIn();
+  const { mutate, isPending } = useSignIn();
 
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
@@ -81,7 +83,7 @@ export const SignInCard = () => {
               )}
             />
             <Button
-              disabled={false}
+              disabled={isPending}
               size="lg"
               className="w-full">
               Sign In
@@ -94,7 +96,7 @@ export const SignInCard = () => {
       </div>
       <CardContent className="p-7 flex flex-col gap-y-4">
         <Button
-          disabled={false}
+          disabled={isPending}
           variant="secondary"
           size="lg"
           className="w-full">
@@ -102,7 +104,7 @@ export const SignInCard = () => {
           Continue with Google
         </Button>
         <Button
-          disabled={false}
+          disabled={isPending}
           variant="secondary"
           size="lg"
           className="w-full">
